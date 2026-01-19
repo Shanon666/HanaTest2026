@@ -19,6 +19,7 @@ jobs:
   
     - name: 'Run Azure CLI commands'
       run: |
+          az account set --subscription 1447ccf1-0e8a-4edd-8595-2f370d142fa6
           az account show
           az group list
           pwd
