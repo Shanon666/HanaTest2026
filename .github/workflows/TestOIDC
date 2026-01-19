@@ -1,0 +1,34 @@
+name: Test Azure Login with OIDC
+
+on: [push]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Azure Login using OIDC
+      uses: azure/login@v1
+      with:
+        client-id: 2235a2ff-ee32-444e-b49b-8b3bcbe7bdff
+        tenant-id: b388b808-0ec9-4a09-a414-a7cbbd8b7e9b
+        subscription-id: 1447ccf1-0e8a-4edd-8595-2f370d142fa6
+        environment: AzureChinaCloud
+
+    - name: Verify Azure Login
+      run: |
+        echo "=== Current Azure Cloud ==="
+        az cloud show
+
+        echo "=== Current Azure Account ==="
+        az account show
+
+        echo "=== List Resource Groups ==="
+        az group list -o table
