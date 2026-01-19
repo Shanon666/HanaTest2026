@@ -1,0 +1,24 @@
+name: Run Azure Login with OpenID Connect
+on: [push]
+
+permissions:
+      id-token: write
+      contents: read
+      
+jobs: 
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Az CLI login'
+      uses: azure/login@v1
+      with:
+          client-id: 2235a2ff-ee32-444e-b49b-8b3bcbe7bdff
+          tenant-id: b388b808-0ec9-4a09-a414-a7cbbd8b7e9b
+          subscription-id: 1447ccf1-0e8a-4edd-8595-2f370d142fa6
+          environment: AzureChinaCloud
+  
+    - name: 'Run Azure CLI commands'
+      run: |
+          az account show
+          az group list
+          pwd
